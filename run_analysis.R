@@ -70,8 +70,14 @@ humanActivityCols <- gsub("Gyro", "Gyroscope", humanActivityCols)
 humanActivityCols <- gsub("Mag", "Magnitude", humanActivityCols)
 humanActivityCols <- gsub("Freq", "Frequency", humanActivityCols)
 humanActivityCols <- gsub("mean", "Mean", humanActivityCols)
-humanActivityCols <- gsub("SD", "StandardDeviation", humanActivityCols)
-
-humanActivityCols <- gsub("Bodybody", to "Body", humanActivity role)
+humanActivityCols <- gsub("std", "StandardDeviation", humanActivityCols)
+humanActivityCols <- gsub("Bodybody", "Body", humanActivityCols)
 
 colnames(humanActivity) <- humanActivityCols
+
+## Create a second, independent tidy set with the average of each variable for each activity and each subject
+
+humanActivityMeans <- humanActivity %>%
+  group_by(Subject, Activity) %>%
+  summarise_all(mean)
+
